@@ -61,3 +61,4 @@ if __name__ == '__main__':
         pub.publish(pcmsg)
         r.sleep()
 
+    fx8client.stop()
