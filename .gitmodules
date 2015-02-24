@@ -1,0 +1,3 @@
+[submodule "3rdparty/fx8libpy"]
+	path = 3rdparty/fx8libpy
+	url = https://git.ompugao.mydns.jp/sifi/fx8libpy.git
