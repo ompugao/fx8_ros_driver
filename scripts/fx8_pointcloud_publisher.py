@@ -10,7 +10,7 @@ from functools import reduce
 import operator
 
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '../3rdparty/fx8libpy/'))
-print sys.path
+#print sys.path
 import fx8lib
 
 if __name__ == '__main__':
@@ -46,7 +46,6 @@ if __name__ == '__main__':
     #pcmsg.point_step #?
     #pcmsg.row_step #?
 
-    #from IPython.terminal import embed; ipshell=embed.InteractiveShellEmbed(config=embed.load_default_config())(local_ns=locals())
     while not rospy.is_shutdown():
         pointcloud, distance_buffer, timestamp = fx8client.get_data()
 
@@ -54,9 +53,7 @@ if __name__ == '__main__':
         #pcmsg.width = distance_buffer.shape[0]
         #pcmsg.height = distance_buffer.shape[1]
         #pcmsg.data = pointcloud.reshape((reduce(operator.mul,pointcloud.shape), 1))
-        pcmsg.points = []
-        for p in pointcloud:
-            pcmsg.points.append(Point32(x=p[0]/1000.0, y=p[1]/1000.0, z=p[2]/1000.0))
+        pcmsg.points = [Point32(x=p[0]/1000.0, y=p[1]/1000.0, z=p[2]/1000.0) for p in pointcloud]
         rospy.loginfo('publish msg')
         pub.publish(pcmsg)
         r.sleep()
